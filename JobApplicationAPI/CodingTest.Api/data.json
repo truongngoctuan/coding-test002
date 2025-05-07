@@ -1,0 +1,18 @@
+{
+  "userEntity": [
+    {
+      "userId": "ca1b4642-f77e-4f54-9688-c3505fde34f1",
+      "firstName": "a",
+      "lastName": "b",
+      "createdDate": "0001-01-01T00:00:00",
+      "updatedDate": null
+    },
+    {
+      "userId": "0ef99d92-429f-4da0-ba03-d124fb39abf7",
+      "firstName": "a",
+      "lastName": "b",
+      "createdDate": "0001-01-01T00:00:00",
+      "updatedDate": null
+    }
+  ]
+}
