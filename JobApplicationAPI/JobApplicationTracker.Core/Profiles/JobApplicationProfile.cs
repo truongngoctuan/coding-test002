@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using JobApplicationTracker.Core.Features.Users;
 using JobApplicationTracker.Domain.Entities;
 
@@ -9,7 +8,8 @@ public class JobApplicationProfile : Profile
 {
     public JobApplicationProfile()
     {
-        CreateMap<JobApplicationEntity, JobApplicationVM>();
+        CreateMap<JobApplicationEntity, JobApplicationResponseVM>()
+            .ForMember(dest => dest.DateApplied, opt => opt.MapFrom(src => src.CreatedDate));
         CreateMap<CreateJobApplicationRequest, JobApplicationEntity>();
     }
 }

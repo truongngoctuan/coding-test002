@@ -2,7 +2,7 @@
 using MediatR;
 
 namespace JobApplicationTracker.Core.Features.Users;
-public class GetJobApplicationsRequest : IRequest<IEnumerable<JobApplicationVM>>
+public class GetJobApplicationsRequest : IRequest<IEnumerable<JobApplicationResponseVM>>
 {
     public GetJobApplicationsRequest()
     {

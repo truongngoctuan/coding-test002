@@ -7,7 +7,7 @@ using MediatR;
 
 namespace JobApplicationTracker.Core.Features.Users;
 
-public class GetJobApplicationsRequestHandle : IRequestHandler<GetJobApplicationsRequest, IEnumerable<JobApplicationVM>>
+public class GetJobApplicationsRequestHandle : IRequestHandler<GetJobApplicationsRequest, IEnumerable<JobApplicationResponseVM>>
 {
     private readonly IMapper _mapper;
     private readonly IJobApplicationRepository _jobApplicationRepository;
@@ -17,9 +17,9 @@ public class GetJobApplicationsRequestHandle : IRequestHandler<GetJobApplication
         _jobApplicationRepository = jobApplicationRepository;
     }
 
-    public async Task<IEnumerable<JobApplicationVM>> Handle(GetJobApplicationsRequest request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<JobApplicationResponseVM>> Handle(GetJobApplicationsRequest request, CancellationToken cancellationToken)
     {
         var users = await _jobApplicationRepository.GetAllAsync();
-        return _mapper.Map<IEnumerable<JobApplicationVM>>(users);
+        return _mapper.Map<IEnumerable<JobApplicationResponseVM>>(users);
     }
 }

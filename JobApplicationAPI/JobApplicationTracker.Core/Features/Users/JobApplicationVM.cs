@@ -10,3 +10,8 @@ public class JobApplicationVM
     public JobApplicationStatus Status { get; set; }
     public DateTime DateApplied { get; set; }
 }
+
+public class JobApplicationResponseVM : JobApplicationVM
+{
+    public int JobApplicationId { get; set; }
+}

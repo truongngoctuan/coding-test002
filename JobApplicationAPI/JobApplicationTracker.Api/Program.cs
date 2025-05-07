@@ -1,4 +1,8 @@
+using System.Reflection;
+using JobApplicationTracker.Persistence;
 using JobApplicationTracker.Api;
+using JobApplicationTracker.Core;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +21,12 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddDbContext<AppDBContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddApplicationService();
+builder.Services.AddPersistenceService();
 
 var app = builder.Build();
 

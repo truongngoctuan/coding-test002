@@ -2,6 +2,6 @@
 
 namespace JobApplicationTracker.Core.Features.Users;
 
-public class CreateJobApplicationRequest : JobApplicationVM, IRequest<JobApplicationVM>
+public class CreateJobApplicationRequest : JobApplicationVM, IRequest<JobApplicationResponseVM>
 {
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using JobApplicationTracker.Domain.Entities;
+﻿using JobApplicationTracker.Domain.Entities;
 
 namespace JobApplicationTracker.Core.Contracts.Persistences;
 
