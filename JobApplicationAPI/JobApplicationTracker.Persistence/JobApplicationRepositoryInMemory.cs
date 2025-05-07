@@ -23,19 +23,9 @@ public class JobApplicationRepositoryInMemory : IJobApplicationRepository
         return entity;
     }
 
-    public Task DeleteAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<JobApplicationEntity>> GetAllAsync()
     {
         return await _dbContext.JobApplications.AsNoTracking().ToListAsync();
-    }
-
-    public Task<JobApplicationEntity> GetById(Guid id)
-    {
-        throw new NotImplementedException();
     }
 
     public Task UpdateAsync(JobApplicationEntity entity)

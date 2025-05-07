@@ -2,6 +2,8 @@
 
 namespace JobApplicationTracker.Core.Contracts.Persistences;
 
-public interface IJobApplicationRepository : IAsyncRepository<JobApplicationEntity>
+public interface IJobApplicationRepository : IInseartionRepository<JobApplicationEntity>,
+    IUpdateRepository<JobApplicationEntity>,
+    IGetAllRepository<JobApplicationEntity>
 {
 }

@@ -11,6 +11,12 @@ public class JobApplicationVM
     public DateTime DateApplied { get; set; }
 }
 
+public class CreateJobApplicationVM
+{
+    public required string CompanyName { get; set; }
+    public required string Position { get; set; }
+}
+
 public class JobApplicationResponseVM : JobApplicationVM
 {
     public int JobApplicationId { get; set; }

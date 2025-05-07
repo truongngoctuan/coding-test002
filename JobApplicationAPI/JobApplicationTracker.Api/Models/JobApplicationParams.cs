@@ -2,9 +2,6 @@
 
 namespace CodingTest.Api.Models;
 
-public class JobApplicationParams : JobApplicationVM
+public class JobApplicationParams : CreateJobApplicationVM
 {
-    public JobApplicationParams()
-    {
-    }
 }

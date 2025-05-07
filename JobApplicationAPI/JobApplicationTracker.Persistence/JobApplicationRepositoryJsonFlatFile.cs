@@ -34,20 +34,10 @@ public class JobApplicationRepositoryJsonFlatFile : IJobApplicationRepository
         return entity;
     }
 
-    public Task DeleteAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<IEnumerable<JobApplicationEntity>> GetAllAsync()
     {
         var collection = getCollection();
         return Task.FromResult<IEnumerable<JobApplicationEntity>>(collection.AsQueryable().AsEnumerable<JobApplicationEntity>());
-    }
-
-    public Task<JobApplicationEntity> GetById(Guid id)
-    {
-        throw new NotImplementedException();
     }
 
     public Task UpdateAsync(JobApplicationEntity entity)
