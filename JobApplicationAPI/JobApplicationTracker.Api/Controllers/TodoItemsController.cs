@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using JobApplicationTracker.Api;
 using JobApplicationTracker.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobApplicationTracker.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
