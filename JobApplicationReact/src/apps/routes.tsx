@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import JobListPage from "./job-application/JobListPage";
-import CreateJobPage from "./job-application/CreateJobPage";
+import JobListPage from "./applications/JobListPage";
+import CreateJobPage from "./applications/CreateJobPage";
 
 export const router = createBrowserRouter([
   {
