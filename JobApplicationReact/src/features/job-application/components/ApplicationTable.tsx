@@ -29,8 +29,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getApplications } from "../api/Service";
+import { useGetApplications } from "../ApiHooks";
 
 export const schema = z.object({
   jobApplicationId: z.number(),
@@ -153,12 +152,7 @@ export function ApplicationTable({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const applicationsResp = useQuery({
-    queryKey: ["applications"],
-    queryFn: getApplications,
-    staleTime: 1000,
-  });
-  console.log(applicationsResp.data);
+  const applicationsResp = useGetApplications();
 
   useEffect(() => {
     if (applicationsResp.data) {
