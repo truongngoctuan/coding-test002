@@ -8,7 +8,7 @@ namespace ToDoApi.Controllers;
 
 [ApiController]
 [Route("/api/applications")]
-[Authorize]
+// [Authorize]
 public class ApplicationsController : ControllerBase
 {
     private readonly ILogger<ApplicationsController> _logger;
@@ -31,14 +31,12 @@ public class ApplicationsController : ControllerBase
     [HttpPost()]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<JobApplicationVM>> CreateUser(JobApplicationParams user)
+    public async Task<ActionResult<JobApplicationVM>> CreateJobApplication(JobApplicationParams user)
     {
         var results = await _mediator.Send(new CreateJobApplicationRequest
         {
             CompanyName = user.CompanyName,
             Position = user.Position,
-            Status = user.Status,
-            DateApplied = user.DateApplied
         });
         return Ok(results);
     }
