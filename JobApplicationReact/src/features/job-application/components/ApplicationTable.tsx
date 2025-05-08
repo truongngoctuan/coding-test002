@@ -12,15 +12,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2Icon, MoreVerticalIcon } from "lucide-react";
-import {
   Table,
   TableBody,
   TableCell,
@@ -30,9 +21,8 @@ import {
 } from "@/components/ui/table";
 import { useEffect, useState } from "react";
 import { useGetApplications } from "../ApiHooks";
-import { Badge } from "@/components/ui/badge";
-import { JobApplicationStatus } from "../api/types";
-import { getJobApplicationStatusString } from "../utils";
+import DropdownMenuActionButton from "./ApplicationTable/DropdownMenuActionButton";
+import ApplicationStatusBadge from "./ApplicationTable/ApplicationStatusBadge";
 
 export const schema = z.object({
   jobApplicationId: z.number(),
@@ -62,17 +52,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <Badge
-        variant="outline"
-        className="flex gap-1 px-1.5 text-muted-foreground [&_svg]:size-3"
-      >
-        {row.original.status === JobApplicationStatus.Offer && (
-          <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
-        )}
-        {getJobApplicationStatusString(row.original.status)}
-      </Badge>
-    ),
+    cell: ({ row }) => <ApplicationStatusBadge status={row.original.status} />,
   },
   {
     accessorKey: "dateApplied",
@@ -84,26 +64,11 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     id: "actions",
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
-            size="icon"
-          >
-            <MoreVerticalIcon />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-32">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+    cell: ({ row }) => (
+      <DropdownMenuActionButton
+        id={row.original.jobApplicationId}
+        status={row.original.status}
+      />
     ),
   },
 ];

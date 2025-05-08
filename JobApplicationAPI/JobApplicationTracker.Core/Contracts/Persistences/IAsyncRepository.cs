@@ -27,7 +27,7 @@ public interface IUpdateRepository<T> where T : class
 }
 public interface IGetByIdRepository<T> where T : class
 {
-    Task<T> GetById(Guid id);
+    Task<T?> GetByIdAsync(int id);
 }
 public interface IGetAllRepository<T> where T : class
 {

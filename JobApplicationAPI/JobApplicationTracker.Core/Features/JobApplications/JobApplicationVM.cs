@@ -17,6 +17,12 @@ public class CreateJobApplicationVM
     public required string Position { get; set; }
 }
 
+public class UpdateJobApplicationVM
+{
+    public int JobApplicationId { get; set; }
+    public JobApplicationStatus? Status { get; set; }
+}
+
 public class JobApplicationResponseVM : JobApplicationVM
 {
     public int JobApplicationId { get; set; }

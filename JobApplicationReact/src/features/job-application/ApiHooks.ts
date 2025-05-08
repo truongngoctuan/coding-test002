@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createApplication, getApplications } from "./api/Service";
+import { createApplication, getApplications, updateApplicationStatus } from "./api/Service";
 
 export const useGetApplications = () => {
   return useQuery({
@@ -18,3 +18,13 @@ export const useCreateApplicationMutation = () => {
     },
   });
 }
+
+export const useUpdateApplicationStatusMutation = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateApplicationStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+    },
+  });
+};

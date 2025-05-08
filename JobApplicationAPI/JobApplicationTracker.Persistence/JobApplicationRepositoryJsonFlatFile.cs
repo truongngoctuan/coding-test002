@@ -44,4 +44,9 @@ public class JobApplicationRepositoryJsonFlatFile : IJobApplicationRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<JobApplicationEntity?> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

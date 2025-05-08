@@ -1,10 +1,10 @@
 using CodingTest.Api.Models;
+using JobApplicationTracker.Api.Models;
 using JobApplicationTracker.Core.Features.Users;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ToDoApi.Controllers;
+namespace JobApplicationTracker.Api.Controllers;
 
 [ApiController]
 [Route("/api/applications")]
@@ -31,12 +31,25 @@ public class ApplicationsController : ControllerBase
     [HttpPost()]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<JobApplicationVM>> CreateJobApplication(JobApplicationParams user)
+    public async Task<ActionResult<JobApplicationVM>> CreateJobApplication(JobApplicationParams application)
     {
         var results = await _mediator.Send(new CreateJobApplicationRequest
         {
-            CompanyName = user.CompanyName,
-            Position = user.Position,
+            CompanyName = application.CompanyName,
+            Position = application.Position,
+        });
+        return Ok(results);
+    }
+
+    [HttpPatch("{jobApplicationId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<JobApplicationVM>> UpdateJobApplication(int jobApplicationId, UpdateJobApplicationParams application)
+    {
+        var results = await _mediator.Send(new UpdateJobApplicationRequest
+        {
+            JobApplicationId = jobApplicationId,
+            Status = application.Status,
         });
         return Ok(results);
     }

@@ -28,8 +28,17 @@ public class JobApplicationRepositoryInMemory : IJobApplicationRepository
         return await _dbContext.JobApplications.AsNoTracking().ToListAsync();
     }
 
+    public Task<JobApplicationEntity?> GetByIdAsync(int id)
+    {
+        return _dbContext.JobApplications
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.JobApplicationId == id);
+    }
+
     public Task UpdateAsync(JobApplicationEntity entity)
     {
-        throw new NotImplementedException();
+        entity.UpdatedDate = DateTime.UtcNow;
+        _dbContext.JobApplications.Update(entity);
+        return _dbContext.SaveChangesAsync();
     }
 }

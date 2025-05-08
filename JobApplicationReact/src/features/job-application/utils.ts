@@ -14,3 +14,22 @@ export function getJobApplicationStatusString(status: JobApplicationStatus) {
       return "Unknown";
   }
 }
+
+export function getNextStatuses(status: JobApplicationStatus) {
+  switch (status) {
+    case JobApplicationStatus.Applied:
+      return [
+        JobApplicationStatus.Interview,
+        JobApplicationStatus.Offer,
+        JobApplicationStatus.Rejected,
+      ];
+    case JobApplicationStatus.Interview:
+      return [JobApplicationStatus.Offer, JobApplicationStatus.Rejected];
+    case JobApplicationStatus.Offer:
+      return [JobApplicationStatus.Rejected];
+    case JobApplicationStatus.Rejected:
+      return [];
+    default:
+      return [];
+  }
+}
