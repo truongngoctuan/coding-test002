@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { MoreVerticalIcon } from "lucide-react";
+import { CheckCircle2Icon, MoreVerticalIcon } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -30,12 +30,15 @@ import {
 } from "@/components/ui/table";
 import { useEffect, useState } from "react";
 import { useGetApplications } from "../ApiHooks";
+import { Badge } from "@/components/ui/badge";
+import { JobApplicationStatus } from "../api/types";
+import { getJobApplicationStatusString } from "../utils";
 
 export const schema = z.object({
   jobApplicationId: z.number(),
   companyName: z.string(),
   position: z.string(),
-  status: z.string(),
+  status: z.number(),
   dateApplied: z.date(),
 });
 
@@ -60,25 +63,22 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div>{row.original.status}</div>
-      // <Badge
-      //   variant="outline"
-      //   className="flex gap-1 px-1.5 text-muted-foreground [&_svg]:size-3"
-      // >
-      //   {row.original.status === "Done" ? (
-      //     <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
-      //   ) : (
-      //     <LoaderIcon />
-      //   )}
-      //   {row.original.status}
-      // </Badge>
+      <Badge
+        variant="outline"
+        className="flex gap-1 px-1.5 text-muted-foreground [&_svg]:size-3"
+      >
+        {row.original.status === JobApplicationStatus.Offer && (
+          <CheckCircle2Icon className="text-green-500 dark:text-green-400" />
+        )}
+        {getJobApplicationStatusString(row.original.status)}
+      </Badge>
     ),
   },
   {
     accessorKey: "dateApplied",
     header: "Date Applied",
     cell: ({ row }) => {
-      return <div>{row.original.dateApplied.toString()}</div>;
+      return <div>{new Date(row.original.dateApplied).toDateString()}</div>;
     },
     enableHiding: false,
   },
